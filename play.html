@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#181818">
+  <meta name="description" content="WEB QUEST — бесконечный платформер о сдаче веб-дизайна: практические работы, контрольные точки, дедлайны и оценки.">
+  <title>WEB QUEST — Бесконечная сессия</title>
+  <style>
+:root{color-scheme:dark;--bg:#181818;--panel:#222;--line:#3b3b3b;--muted:#a3a3a3;--ink:#f1f1f1;--lime:#d5ff50;--coral:#ff7b68;--blue:#83b6fa;--purple:#b99af7;--mint:#50dab8}
+*{box-sizing:border-box}html{scroll-behavior:smooth;overflow-anchor:none}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}button{font:inherit}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,canvas:focus-visible{outline:2px solid var(--blue);outline-offset:3px}button:disabled{opacity:.34;cursor:not-allowed}.shell{width:min(1440px,calc(100% - 112px));margin:auto}
+.topbar{border-bottom:1px solid var(--line);height:86px}.header-inner{display:flex;align-items:center;height:100%;gap:30px}.identity{display:flex;align-items:center;gap:12px;flex-shrink:0}.identity-icon{width:43px;height:43px;border:1px solid #555;display:grid;place-items:center;border-radius:10px;font-weight:900;font-size:25px;letter-spacing:-.13em;padding-right:7px}.identity-icon span{color:var(--lime);font-size:13px;letter-spacing:0;margin-left:2px;align-self:start;margin-top:10px}.identity>span:last-child{display:flex;flex-direction:column;gap:4px}.identity strong{font-size:12px;letter-spacing:.075em}.identity small{font-size:8px;letter-spacing:.075em;color:#999;font-weight:700}.nav{display:flex;margin-left:auto;gap:32px;align-items:center;font-size:13px}.nav a:hover,.footer a:hover{color:var(--lime)}.status-pill{border:1px solid #535353;border-radius:5px;padding:13px 15px;display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.045em;font-size:10px;white-space:nowrap}.status-pill i,.pulse-dot,.difficulty-pill i,.eyebrow-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);flex-shrink:0}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:54px;padding:54px 0 58px;align-items:stretch}.hero-left{display:flex;flex-direction:column;justify-content:center}.eyebrow{display:flex;align-items:center;gap:9px;color:#b8b8b8;font-size:11px;font-weight:800;letter-spacing:.05em;margin-bottom:25px}h1,h2,h3,p{margin-top:0}.hero h1{font-size:clamp(67px,8vw,118px);letter-spacing:-.079em;line-height:.94;margin-bottom:24px;font-weight:800}.hero h1 em{font-style:normal;color:var(--lime)}.hero-subtitle{font-size:15px;color:#aaa;line-height:1.65;margin-bottom:25px}.hero-tags{display:flex;gap:22px;font-size:10px;font-weight:800;letter-spacing:.1em;color:#888}.hero-card{background:var(--lime);color:#171717;border-radius:17px;min-height:270px;box-shadow:14px 13px 0 #424242;transform:rotate(1.2deg);padding:24px;display:flex;flex-direction:column;justify-content:space-between}.hero-card-top,.hero-card-footer{display:flex;justify-content:space-between;gap:12px;font-size:11px;font-weight:850}.hero-card-top span{font-size:25px}.hero-big{font-size:145px;line-height:.75;font-weight:900;letter-spacing:-.12em;display:flex;align-items:end}.hero-big span{font-size:16px;letter-spacing:0;margin:0 0 15px 14px}.hero-card-footer{line-height:1.55}.hero-card-footer span{font-size:10px;text-align:right;letter-spacing:.13em}
+.game-section{padding-bottom:43px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:22px}.small-label{font-size:11px;letter-spacing:.09em;font-weight:850;color:#aaa}.section-head h2{margin:7px 0 0;font-size:clamp(30px,3vw,44px);font-weight:780;letter-spacing:-.065em}.accent-dot{color:var(--lime)}.difficulty-pill{display:flex;align-items:center;gap:11px;padding:12px 16px;border:1px solid var(--line);border-radius:7px;font-size:11px;letter-spacing:.035em}.difficulty-pill strong{border-left:1px solid #505050;padding-left:12px;font-size:11px}.scoreboard{border:1px solid var(--line);border-radius:15px 15px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));overflow:hidden;background:#232323}.score-cell{padding:16px 19px;display:flex;align-items:center;gap:14px;min-width:0;border-right:1px solid var(--line)}.score-cell:last-child{border:0}.metric-icon{width:43px;height:43px;flex-shrink:0;border-radius:9px;display:grid;place-items:center;color:#191919;font-size:23px;font-weight:800}.metric-icon.coral{background:var(--coral)}.metric-icon.lime{background:var(--lime)}.metric-icon.blue{background:var(--blue)}.metric-icon.purple{background:var(--purple)}.metric-label{font-size:10px;letter-spacing:.05em;color:#a9a9a9;font-weight:800;display:block}.score-cell strong{display:block;font-size:26px;letter-spacing:-.05em;line-height:1.25;margin-top:4px}.score-cell strong small{font-size:13px;color:#777}.board{height:auto;aspect-ratio:1120 / 600;background:#191919;position:relative;overflow:hidden;border-left:1px solid var(--line);border-right:1px solid var(--line);overflow-anchor:none}.board canvas{display:block;width:100%;height:100%;touch-action:none}.overlay{position:absolute;inset:0;background:rgba(10,10,10,.64);display:flex;align-items:center;justify-content:center;padding:16px}.overlay[hidden]{display:none}.overlay-card{width:min(415px,98%);background:#262626;border:1px solid #4b4b4b;border-radius:14px;box-shadow:0 24px 80px #0009;padding:24px;text-align:left}.overlay-head{display:flex;justify-content:space-between;align-items:center;color:#b7b7b7;font-size:10px;letter-spacing:.09em;font-weight:900}.tiny-dot{width:8px;height:8px;background:var(--lime);border-radius:50%}.overlay-number{width:84px;height:84px;display:grid;place-items:center;background:var(--lime);color:#191919;border-radius:14px;font-size:67px;line-height:1;font-weight:900;letter-spacing:-.09em;margin:20px 0}.overlay-card h3{font-size:31px;letter-spacing:-.055em;margin:0 0 12px}.overlay-card p{font-size:13px;line-height:1.6;color:#aaa;margin:0 0 18px}.overlay-facts{display:flex;gap:9px;margin:0 0 21px;flex-wrap:wrap}.overlay-facts span{font-size:9px;font-weight:850;letter-spacing:.055em;border:1px solid #484848;border-radius:4px;padding:7px 9px;color:#bdbdbd}.button{border:1px solid transparent;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:12px 16px;cursor:pointer;font-size:12px;font-weight:850;transition:background .15s ease,transform .15s ease;white-space:nowrap}.button:not(:disabled):hover{transform:translateY(-1px)}.button-lime{background:var(--lime);color:#191919}.button-lime:hover{background:#c6ef3a}.button-outline{background:#272727;border-color:#505050;color:#eee}.button-outline:hover{background:#323232}.button-quiet{background:transparent;color:#aaa}.button-quiet:hover{color:#fff}.button[hidden]{display:none}.overlay-cta{width:100%;justify-content:space-between;font-size:13px;min-height:47px}.overlay-cta span{font-size:19px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border:1px solid var(--line);border-radius:0 0 12px 12px;background:#232323;padding:14px 18px;overflow-anchor:none}.toolbar-buttons{display:flex;flex-wrap:wrap;gap:8px}.toolbar-status{font-size:11px;color:#aaa;display:flex;align-items:center;gap:8px}.touch-controls{display:none;justify-content:space-between;gap:16px;margin-top:14px}.touch-controls button{min-width:83px;height:64px;background:#2c2c2c;color:#fff;border:1px solid #525252;border-radius:9px;font-size:28px;font-weight:800;touch-action:none;user-select:none;-webkit-user-select:none}.touch-controls button.is-pressed{background:var(--lime);color:#191919}.touch-dpad{display:flex;gap:12px}.touch-controls .touch-jump{background:var(--lime);color:#171717;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 20px}.touch-jump span{font-size:11px;letter-spacing:.07em}.below-board{display:flex;justify-content:flex-start;gap:25px;flex-wrap:wrap;padding:17px 0;color:#777;font-size:10px;letter-spacing:.035em}.below-board b{color:#eee;margin-right:5px}
+.rules{padding:48px 0 68px}.rules-side{font-size:10px;letter-spacing:.07em;color:#999;font-weight:800;margin-bottom:7px}.rule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.rule-card{border:1px solid var(--line);background:#242424;border-radius:14px;padding:23px;min-height:268px;display:flex;flex-direction:column}.rule-top{display:flex;justify-content:space-between;align-items:start;color:#aaa;font-size:10px;font-weight:800;letter-spacing:.07em}.rule-icon{width:49px;height:49px;display:grid;place-items:center;font-size:29px;font-weight:900;border-radius:9px;color:#1a1a1a}.rule-icon.lime{background:var(--lime)}.rule-icon.coral{background:var(--coral)}.rule-icon.purple{background:var(--purple)}.rule-card h3{margin:22px 0 10px;letter-spacing:-.04em;font-size:23px}.rule-card p{font-size:13px;color:#aaa;line-height:1.6;margin:0 0 20px}.rule-key{border-top:1px solid #434343;padding-top:14px;margin-top:auto;color:var(--lime);letter-spacing:.035em;font-size:10px;font-weight:850}.grading{background:#d5ff50;color:#181818;margin-top:16px;padding:22px 25px;border-radius:11px;display:flex;justify-content:space-between;gap:25px;align-items:center}.grading>strong{font-size:11px;letter-spacing:.06em}.grading>div{display:flex;flex-wrap:wrap;gap:10px 20px;font-size:12px}.grading .bad{color:#844838}.footer{border-top:1px solid #393939;padding:24px 0;color:#949494;font-size:10px;letter-spacing:.035em}.footer .shell{display:flex;gap:24px;justify-content:space-between}.footer a{color:#ddd;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:1050px){.shell{width:calc(100% - 48px)}.hero{grid-template-columns:1fr 270px;gap:28px}.hero-card{min-height:230px}.hero-big{font-size:118px}.score-cell{padding:13px 11px;gap:9px}.metric-icon{width:35px;height:35px;font-size:20px}.metric-label{font-size:9px}.toolbar-status{width:100%}}
+@media(max-width:760px){.topbar{height:71px}.identity small{display:none}.nav{gap:16px}.nav a{font-size:11px}.status-pill{display:none}.hero{display:block;padding:38px 0 43px}.hero h1{font-size:clamp(59px,12vw,88px)}.hero-subtitle{font-size:13px}.hero-card{display:none}.section-head h2{font-size:32px}.difficulty-pill{padding:9px}.scoreboard{grid-template-columns:repeat(2,1fr)}.score-cell:nth-child(2){border-right:0}.score-cell:nth-child(-n+2){border-bottom:1px solid var(--line)}.score-cell{padding:12px}.board{height:360px;aspect-ratio:auto}.rule-grid{grid-template-columns:1fr}.rule-card{min-height:0}.rule-card h3{margin-top:12px}.rules-side{display:none}.grading{align-items:start;flex-direction:column}.touch-controls{display:flex}.below-board{gap:12px 22px}.footer .shell{flex-direction:column}}
+@media(max-width:520px){.shell{width:calc(100% - 28px)}.header-inner{gap:8px}.identity strong{font-size:12px}.identity-icon{width:34px;height:34px;font-size:20px}.identity-icon span{font-size:10px;margin-top:8px}.nav{gap:13px}.nav a:last-child{display:none}.eyebrow{font-size:9px}.hero h1{font-size:clamp(50px,12.8vw,75px)}.hero-tags{gap:11px;font-size:8px}.section-head{align-items:start;gap:8px}.section-head h2{font-size:29px}.difficulty-pill{display:flex;flex-direction:column;gap:4px;font-size:9px}.difficulty-pill strong{border-left:0;padding-left:0;font-size:9px}.score-cell strong{font-size:23px}.metric-label{font-size:8px}.board{height:390px}.overlay-card{width:min(330px,98%);padding:16px}.overlay-number{width:56px;height:56px;font-size:42px;margin:11px 0}.overlay-card h3{font-size:25px;margin-bottom:8px}.overlay-card p{font-size:12px;line-height:1.45;margin-bottom:10px}.overlay-facts{margin-bottom:12px}.overlay-facts span{padding:5px;font-size:8px}.overlay-cta{min-height:40px}.toolbar{padding:10px}.toolbar-buttons{gap:6px}.toolbar-buttons .button{min-height:38px;padding:9px 10px;font-size:10px}.touch-controls button{min-width:75px}.touch-controls .touch-jump{padding:0 15px}}
+@media(pointer:coarse) and (min-width:761px){.touch-controls{display:flex}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+/* Student roster / generated-game extras. Styling follows the teacher portal dark cards. */
+.roster{padding:26px 0 70px;scroll-margin-top:25px}
+.roster-intro{max-width:870px;color:#b0b0b0;font-size:14px;line-height:1.7;margin:0 0 22px}
+.character-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.student-card{font-family:inherit;cursor:pointer;text-align:left;border-radius:15px;display:flex;flex-direction:column;gap:17px;padding:18px 18px 15px;border:1px solid #454545;background:#252525;color:#f4f4f4;transition:transform .15s,background .15s,border-color .15s;min-height:260px}
+.student-card:hover{transform:translateY(-3px);border-color:#8a8a8a;background:#2b2b2b}
+.student-card.is-selected{border-color:var(--lime);background:#2a2e23;box-shadow:inset 0 0 0 1px var(--lime)}
+.student-top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:9px;font-weight:900;letter-spacing:.09em;color:#999}
+.student-pick{color:var(--lime);opacity:0}
+.student-card.is-selected .student-pick{opacity:1}
+.student-main{display:flex;gap:15px;align-items:center;flex:1;min-width:0}
+.student-portrait{width:100px;min-width:100px;height:118px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:color-mix(in srgb,var(--student-accent) 28%,#202020);box-shadow:inset 0 -5px 0 var(--student-accent)}
+.student-portrait canvas{display:block;width:96px;height:115px}
+.student-info{min-width:0;display:flex;flex-direction:column;gap:6px}
+.student-info strong{font-size:19px;letter-spacing:-.055em;line-height:1.1}
+.student-info em{font-size:11px;font-style:normal;font-weight:800;color:var(--lime)}
+.student-story{font-size:11px;color:#aaa;line-height:1.55}
+.student-perk{border-top:1px solid #444;display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:14px}
+.student-perk span{font-size:9px;color:#888;font-weight:900;letter-spacing:.06em;flex-shrink:0}
+.student-perk b{font-size:11px;text-align:right;font-weight:750;color:#fff}
+.character-help{font-size:11px;color:#888;margin:15px 0 0}
+.rule-icon.blue{background:var(--blue)}
+.rule-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.rule-card{min-height:305px}
+.rule-card h3{font-size:21px}
+.run-boosts{display:flex;align-items:center;gap:13px 25px;flex-wrap:wrap;padding:13px 18px;border:1px solid #414141;border-top:0;background:#1e1e1e;border-radius:0 0 10px 10px;color:#898989;font-size:10px;letter-spacing:.035em;font-weight:800;overflow-anchor:none}
+.run-boosts b{color:var(--lime);font-size:11px}
+.run-boosts small{color:#9b9b9b;display:inline-block;font-size:9px;padding-left:6px}
+.run-boosts>span:last-child{margin-left:auto}
+@media(max-width:1180px){.character-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rule-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rule-card{min-height:260px}}
+@media(max-width:760px){.roster{padding:0 0 48px}.student-card{min-height:250px}.student-main{gap:10px}.student-portrait{width:85px;min-width:85px}.student-info strong{font-size:17px}.student-perk{align-items:start;flex-direction:column;gap:5px}.student-perk b{text-align:left}.run-boosts>span:last-child{margin-left:0}}
+@media(max-width:560px){.character-grid{grid-template-columns:1fr;gap:10px}.student-card{min-height:0;padding:14px;gap:11px}.student-main{align-items:center;gap:17px}.student-portrait{width:95px;min-width:95px}.student-info strong{font-size:20px}.student-perk{flex-direction:row}.student-perk b{text-align:right}.rule-grid{grid-template-columns:1fr}.rule-card{min-height:0}.nav a[href='#how']{display:none}.run-boosts{padding:12px}.run-boosts span{flex:1 1 42%}}
+
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell header-inner">
+      <a class="identity" href="#top" aria-label="WEB QUEST — к началу">
+        <span class="identity-icon">W<span>✳</span></span>
+        <span><strong>WEB QUEST</strong><small>ПЛАТФОРМЕР ПО WEB-ДИЗАЙНУ</small></span>
+      </a>
+      <nav class="nav" aria-label="Навигация">
+        <a href="#students">Студенты</a><a href="#game">Играть</a>
+        <a href="#how">Правила</a>
+        <a href="https://needle.voklaf.ru/teacher-portal/#courses" target="_blank" rel="noopener noreferrer">Портал ↗</a>
+      </nav>
+      <span class="status-pill"><i></i> INFINITE MODE</span>
+    </div>
+  </header>
+  <main id="top" class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> СПБГУПТД / ИГРОВАЯ ДИСЦИПЛИНА / 2026</div>
+        <h1 id="hero-title">Бесконечная<br><em>сессия.</em></h1>
+        <p class="hero-subtitle">Шесть студентов. Один преподаватель. Бесконечно много семестров.<br>Прыгай по движущимся платформам, собирай работы и переживи даже летающую Сессию.</p>
+        <div class="hero-tags"><span>01 / ВЫБИРАЙ</span><span>02 / ПРОХОДИ</span><span>03 / ВЫЖИВАЙ</span></div>
+      </div>
+      <div class="hero-card" aria-label="Карточка игры">
+        <div class="hero-card-top"><strong>СЕЙЧАС В ПРОГРАММЕ</strong><span>↗</span></div>
+        <div class="hero-big">∞<span>уровней</span></div>
+        <div class="hero-card-footer"><div>СЛОЖНОСТЬ РАСТЁТ<br>ПОСЛЕ КАЖДОЙ СДАЧИ</div><span>6<br>HEROES</span></div>
+      </div>
+    </section>
+
+    <section class="roster" id="students" aria-labelledby="roster-title">
+      <div class="section-head"><div><span class="small-label">01 / СТУДЕНЧЕСКИЙ СОСТАВ</span><h2 id="roster-title">Кто пойдёт на зачёт<span class="accent-dot">?</span></h2></div><span class="rules-side">6 СТУДЕНТОВ · 6 РАЗНЫХ УМЕНИЙ</span></div>
+      <p class="roster-intro">У каждого своя университетская история и полезная способность. Выбирай персонажа до старта. Можно сменить студента в любой момент, но текущая попытка начнётся сначала.</p>
+      <div id="characterGrid" class="character-grid" aria-label="Выбор персонажа"></div>
+      <p id="characterHelp" class="character-help" role="status">Нажми на карточку студента, чтобы выбрать персонажа.</p>
+    </section>
+
+    <section class="game-section" id="game" aria-label="Игра WEB QUEST">
+      <div class="section-head"><div><span class="small-label">02 / ВРЕМЯ НА ПЕРЕМЕНУ</span><h2>Игровое поле<span class="accent-dot">.</span></h2></div><div class="difficulty-pill"><i id="difficultyDot"></i><span id="difficultyText">РАЗМИНКА</span><strong id="levelDisplay">УРОВЕНЬ 01</strong></div></div>
+      <div class="scoreboard">
+        <div class="score-cell"><span class="metric-icon coral">▤</span><div><span class="metric-label">ПРАКТИЧЕСКИЕ</span><strong id="bookCount">0 <small>/ 3</small></strong></div></div>
+        <div class="score-cell"><span class="metric-icon lime">★</span><div><span class="metric-label">КОНТРОЛЬНЫЕ</span><strong id="starCount">0 <small>/ 2</small></strong></div></div>
+        <div class="score-cell"><span class="metric-icon blue">↗</span><div><span class="metric-label">ОЧКИ ЗАБЕГА</span><strong id="bankCount">0</strong></div></div>
+        <div class="score-cell"><span class="metric-icon purple">✦</span><div><span class="metric-label">РЕКОРДНЫЙ УРОВЕНЬ</span><strong id="bestLevel">01</strong></div></div>
+      </div>
+      <div class="board" id="board">
+        <canvas id="gameCanvas" width="1120" height="600" tabindex="0" aria-label="Бесконечный платформер. Стрелки или A/D для движения, пробел, W или стрелка вверх для прыжка. Собирайте работы и добирайтесь до преподавателя."></canvas>
+        <div class="overlay" id="overlay" aria-live="polite">
+          <div class="overlay-card">
+            <div class="overlay-head"><span id="overlayKicker">СТАРТ / УРОВЕНЬ 01</span><span class="tiny-dot"></span></div>
+            <div class="overlay-number" id="overlayVisual">∞</div>
+            <h3 id="overlayTitle">Выходи на пару!</h3>
+            <p id="overlayMessage">Собирай практические и контрольные. Для зачёта нужно минимум 60%, а для пятёрки — все работы. Не попадись летающей Сессии!</p>
+            <div class="overlay-facts"><span id="overlayFact1">5 РАБОТ</span><span id="overlayFact2">1 ФИНИШ</span></div>
+            <button class="button button-lime overlay-cta" type="button" id="overlayButton">Начать игру <span>↗</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="toolbar">
+        <div class="toolbar-buttons">
+          <button id="startButton" class="button button-lime" type="button"><span>▶</span><span id="startButtonText">Старт</span></button>
+          <button id="pauseButton" class="button button-outline" type="button" disabled><span>Ⅱ</span><span id="pauseButtonText">Пауза</span></button>
+          <button id="restartButton" class="button button-outline" type="button"><span>↻</span> Переиграть уровень</button>
+          <button id="resetButton" class="button button-quiet" type="button">С 1-го уровня</button>
+          <button id="recordButton" class="button button-quiet" type="button" hidden>С рекордного ↗</button>
+        </div>
+        <div class="toolbar-status"><span class="pulse-dot"></span><span id="statusLine" role="status">Ожидание старта</span></div>
+      </div>
+      <div class="run-boosts" aria-label="Бонусы текущего уровня">
+        <span>НА ЭТАПЕ <b id="stagePoints">0</b> ОЧКОВ</span>
+        <span>БОНУСОВ <b id="bonusCounter">0</b></span>
+        <span>ЩИТЫ / ЭФФЕКТЫ <b id="shieldCount">0</b></span>
+        <span>СОБРАНО / ДЛЯ ЗАЧЁТА <b id="passCount">0 / 3</b></span>
+        <span>ИГРАЕТ <b id="selectedStudentName">Кирилл Королёв</b> <small id="selectedStudentPerk">Практики дают +30% очков</small></span>
+      </div>
+      <div class="touch-controls" aria-label="Экранное управление">
+        <div class="touch-dpad"><button type="button" data-control="left" aria-label="Влево">←</button><button type="button" data-control="right" aria-label="Вправо">→</button></div>
+        <button class="touch-jump" type="button" data-control="jump" aria-label="Прыжок">↑ <span>ПРЫЖОК</span></button>
+      </div>
+      <div class="below-board"><span><b>← → / A D</b> ДВИЖЕНИЕ</span><span><b>SPACE / W / ↑</b> ПРЫЖОК</span><span><b>ESC</b> ПАУЗА</span><span><b id="runTimer">00:00</b> ВРЕМЯ</span><span><b id="streakCount">0</b> ИДЕАЛЬНЫХ ПОДРЯД</span></div>
+    </section>
+
+    <section class="rules" id="how" aria-labelledby="rules-title">
+      <div class="section-head"><div><span class="small-label">03 / ИНСТРУКЦИЯ ПО ВЫЖИВАНИЮ</span><h2 id="rules-title">Что ждёт на паре<span class="accent-dot">.</span></h2></div><span class="rules-side">НОВЫЕ МЕХАНИКИ КАЖДЫЕ НЕСКОЛЬКО УРОВНЕЙ</span></div>
+      <div class="rule-grid">
+        <article class="rule-card"><div class="rule-top"><span>01 / МАРШРУТ</span><span class="rule-icon lime">★</span></div><h3>Работ всё больше</h3><p>С каждой новой ступенью растёт число обязательных книг и звёзд. Для тройки нужно 60% работ, на пятёрку — абсолютно всё.</p><div class="rule-key">3 / 4 / 5 = ЗАЧЁТ</div></article>
+        <article class="rule-card"><div class="rule-top"><span>02 / ФИЗИКА</span><span class="rule-icon blue">↕</span></div><h3>Платформы живут</h3><p>Со второго уровня платформы ездят в стороны, с третьего поднимаются и опускаются. С шестого некоторые разваливаются под ногами.</p><div class="rule-key">СЛЕДИ ЗА ДВИЖЕНИЕМ ПЛАТФОРМ</div></article>
+        <article class="rule-card"><div class="rule-top"><span>03 / ОПАСНОСТИ</span><span class="rule-icon coral">!</span></div><h3>Летающая сессия</h3><p>С третьего уровня пролетает «Сессия», с четвёртого появляются движущиеся колючки и патрули. Прыжок на дедлайн сверху его побеждает.</p><div class="rule-key">ЛОВУШКИ МОЖНО ПЕРЕЖИТЬ СО ЩИТОМ</div></article>
+        <article class="rule-card"><div class="rule-top"><span>04 / БОНУСЫ</span><span class="rule-icon purple">✦</span></div><h3>Зачётные усиления</h3><p>Собирай кофе для замедления опасностей, автосохранение для щита и стипендию для очков. Каждому студенту доступен свой навык.</p><div class="rule-key">ПОПРОБУЙ ВСЕХ ШЕСТЕРЫХ</div></article>
+      </div>
+      <div class="grading"><strong>КАК СТАВЯТ ОЦЕНКУ</strong><div><span>100% работ <b>→ 5</b></span><span>80–99% <b>→ 4</b></span><span>60–79% <b>→ 3</b></span><span class="bad">40–59% <b>→ 2</b></span><span class="bad">0–39% <b>→ 1</b></span></div></div>
+    </section>
+  </main>
+  <footer class="footer"><div class="shell"><span>WEB QUEST / STUDENT PROJECT © 2026</span><span>Учебный проект, вдохновлённый интерфейсом <a href="https://needle.voklaf.ru/teacher-portal/" target="_blank" rel="noopener noreferrer">портала Е. С. Кокорина ↗</a></span></div></footer>
+  <script type="module">
+// ---- collision.js ----
+function intersects(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;}
+const overlapsX=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x;
+/** Axis-separated collision with current positions of moving platforms.
+ * Returns the actual supporting object, needed to carry the player along with it.
+ */
+function moveWithCollisions(player,solids,dt,worldWidth){
+  const oldX=player.x;
+  player.x=Math.max(0,Math.min(worldWidth-player.w,player.x+player.vx*dt));
+  for(const s of solids){
+    if(player.y+player.h<=s.y+1||player.y>=s.y+s.h-1)continue;
+    if(player.vx>0&&oldX+player.w<=s.x+1&&player.x+player.w>s.x){player.x=s.x-player.w;player.vx=0;}
+    else if(player.vx<0&&oldX>=s.x+s.w-1&&player.x<s.x+s.w){player.x=s.x+s.w;player.vx=0;}
+  }
+  const oldY=player.y;player.y+=player.vy*dt;
+  let support=null;
+  for(const s of solids){
+    if(!overlapsX(player,s))continue;
+    const oldBottom=oldY+player.h,newBottom=player.y+player.h;
+    if(player.vy>=0&&oldBottom<=s.y+2&&newBottom>=s.y){
+      if(!support||s.y<support.y){player.y=s.y-player.h;player.vy=0;support=s;}
+    }else if(player.vy<0&&oldY>=s.y+s.h-2&&player.y<=s.y+s.h){player.y=s.y+s.h;player.vy=0;}
+  }
+  return support;
+}
+
+// ---- Characters.js ----
+// Все персонажи вымышлены. Портреты и игровые спрайты — оригинальная Canvas-графика.
+// Спрайты рисуются послойно: волосы сзади, одежда, шея и лицо, затем только чёлка.
+// Поэтому длинные волосы никогда не обрамляют подбородок «бородой».
+const CHARACTERS = [
+  {id:'kirill',name:'Кирилл Королёв',title:'Троечник-спринтер',story:'Сдаёт практические в 23:59. Главное — успеть до закрытия Moodle.',perk:'Практики дают +30% очков',power:'books',outfit:'hoodie',skin:'#e5b08a',hair:'#252020',coat:'#ff7b68',pants:'#6488af',shirt:'#fee8a2',hairStyle:'messy',accessory:'headphones'},
+  {id:'polina',name:'Полина Белова',title:'Королева пересдач',story:'Знает расписание пересдач лучше, чем расписание пар.',perk:'Один защитный щит в начале уровня',power:'shield',outfit:'jacket',skin:'#efc2a2',hair:'#935445',coat:'#b99af7',pants:'#42425e',shirt:'#f6e3ee',hairStyle:'ponytail',accessory:'glasses'},
+  {id:'artem',name:'Артём Орлов',title:'Восстановлен приказом',story:'Уже был отчислен. Вернулся доказать, что HTML всё-таки выучил.',perk:'Один возврат к последней контрольной',power:'revive',outfit:'varsity',skin:'#c8916d',hair:'#171c24',coat:'#83b6fa',pants:'#d7d7d7',shirt:'#272e42',hairStyle:'short',accessory:'cap'},
+  {id:'vika',name:'Виктория Смирнова',title:'Староста потока',story:'У неё есть таблица всех дедлайнов, кроме собственных.',perk:'Бонусы дают дополнительно +50 очков',power:'bonuses',outfit:'blazer',skin:'#dba27d',hair:'#4f3029',coat:'#d5ff50',pants:'#3e4650',shirt:'#fbfbfb',hairStyle:'bun',accessory:'glasses'},
+  {id:'danya',name:'Данила Волков',title:'Вечный второкурсник',story:'Второй год изучает одно и то же, зато прыгает дальше всех.',perk:'Прыжок на 7% выше',power:'jump',outfit:'sport',skin:'#edc39c',hair:'#a5723c',coat:'#50dab8',pants:'#363d4b',shirt:'#1c2833',hairStyle:'spiky',accessory:'none'},
+  {id:'masha',name:'Мария Ким',title:'Легенда общежития',story:'Пережила три сессии без сна. Кофемашина знает её по имени.',perk:'Эффект кофе длится вдвое дольше',power:'coffee',outfit:'cardigan',skin:'#e8b99b',hair:'#1a1a23',coat:'#ffca4d',pants:'#66558a',shirt:'#dce9fb',hairStyle:'bob',accessory:'scarf'}
+];
+
+function block(c,x,y,w,h,r,color){c.fillStyle=color;c.beginPath();c.roundRect(x,y,w,h,r);c.fill();}
+function ellipse(c,x,y,rx,ry,color){c.fillStyle=color;c.beginPath();c.ellipse(x,y,rx,ry,0,0,Math.PI*2);c.fill();}
+function polygon(c,points,color){c.fillStyle=color;c.beginPath();c.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)c.lineTo(points[i][0],points[i][1]);c.closePath();c.fill();}
+function stroke(c,points,color,width=1.5){c.strokeStyle=color;c.lineWidth=width;c.lineCap='round';c.lineJoin='round';c.beginPath();c.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)c.lineTo(points[i][0],points[i][1]);c.stroke();}
+
+function backHair(c,p){
+  const h=p.hair;
+  if(p.hairStyle==='ponytail'){
+    // Хвост расположен снаружи контура головы и НЕ соединяется под подбородком.
+    ellipse(c,15,-56,7,7,h); // основание высокого хвоста
+    c.beginPath();
+    c.moveTo(16,-57);c.bezierCurveTo(29,-61,30,-50,26,-44);
+    c.bezierCurveTo(28,-40,24,-36,18,-35);
+    c.bezierCurveTo(22,-42,18,-49,14,-51);c.closePath();c.fillStyle=h;c.fill();
+    stroke(c,[[25,-49],[24,-43],[21,-40]],'#b77868',1.1);
+    block(c,13,-58,5,5,2,'#f0b4d4'); // резинка
+  }else if(p.hairStyle==='bun'){
+    ellipse(c,9,-62,8,8,h);
+    ellipse(c,10,-63,4,4,'#674337');
+    block(c,-12,-55,24,11,6,h);
+  }else if(p.hairStyle==='bob'){
+    // Каре: боковые пряди только СБОКУ головы, до линии челюсти.
+    block(c,-15,-57,30,17,7,h);
+    block(c,-15,-49,6,14,3,h);
+    block(c,9,-49,6,14,3,h);
+    block(c,-15,-38,6,4,2,h);
+    block(c,9,-38,6,4,2,h);
+  }
+}
+
+function clothes(c,p,step){
+  // Штанины и обувь. Лицо всегда будет выше воротника.
+  block(c,-11+step,-16,9,14,2,p.pants);
+  block(c,2-step,-16,9,14,2,p.pants);
+  block(c,-12+step,-4,12,5,2,'#15191e');
+  block(c,2-step,-4,12,5,2,'#15191e');
+  block(c,-13,-38,26,26,6,p.coat);
+  block(c,-19,-36,8,24,4,p.coat);
+  block(c,11,-36,8,24,4,p.coat);
+  block(c,-20,-26,6,9,3,p.skin);
+  block(c,14,-26,6,9,3,p.skin);
+  // Рюкзак — слева и ЗА рукой, а не рядом с причёской.
+  block(c,-21,-32,7,19,3,'#3a4153');
+  block(c,-19,-26,3,7,1,'#242a37');
+
+  if(p.outfit==='jacket'){
+    polygon(c,[[-7,-37],[0,-31],[6,-37]],p.shirt);
+    block(c,-4,-31,8,13,2,p.shirt);
+    stroke(c,[[-10,-36],[-4,-30],[-5,-17]],'#d8c6ff',1.5);
+    stroke(c,[[10,-36],[4,-30],[5,-17]],'#946fd9',1.5);
+    block(c,-8,-18,16,3,1,'#9d7de5');
+  }else if(p.outfit==='blazer'){
+    block(c,-5,-35,10,19,2,p.shirt);
+    polygon(c,[[-12,-36],[-3,-30],[-8,-26]],'#e8ffa2');
+    polygon(c,[[12,-36],[3,-30],[8,-26]],'#a7dd30');
+    block(c,-1,-29,2,11,1,'#292f31');
+    block(c,7,-19,3,3,1,'#263119');
+    // Конспект старосты.
+    block(c,15,-30,7,12,2,'#b99af7');
+    block(c,17,-27,3,2,1,'#f4f4f4');
+  }else if(p.outfit==='cardigan'){
+    block(c,-6,-36,12,22,2,p.shirt);
+    block(c,-6,-35,4,19,1,'#ffd97e');
+    block(c,2,-35,4,19,1,'#e2a931');
+    block(c,0,-30,2,2,1,'#ab7b25');
+    block(c,0,-22,2,2,1,'#ab7b25');
+  }else if(p.outfit==='varsity'){
+    block(c,-5,-35,10,21,1,p.shirt);
+    block(c,-12,-35,2,21,1,'#e6f1ff');
+    block(c,10,-35,2,21,1,'#e6f1ff');
+  }else if(p.outfit==='sport'){
+    block(c,-3,-37,6,24,1,p.shirt);
+    block(c,-10,-21,20,2,1,'#e0fff2');
+  }else{
+    block(c,-7,-34,14,7,3,'#ffd1b0');
+    block(c,-4,-24,8,2,1,'#ffd1b0');
+    block(c,-7,-17,14,2,1,'#c95c54');
+  }
+  block(c,-4,-39,8,6,2,p.skin); // шея находится перед воротником
+}
+
+function head(c,p){
+  // Естественная линия подбородка: никакого тёмного контура под лицом.
+  ellipse(c,-11,-44,2.6,4,p.skin);
+  ellipse(c,11,-44,2.6,4,p.skin);
+  block(c,-11,-56,22,21,[9,9,8,8],p.skin);
+  // Блики на щеках, нос и небольшой рот.
+  ellipse(c,-7,-40,2.2,1.1,'#f5afa2');
+  ellipse(c,7,-40,2.2,1.1,'#f5afa2');
+  block(c,-.5,-43,1.4,2.2,1,'#bd8669');
+  stroke(c,[[-2,-38.7],[0,-38],[2,-38.7]],'#a95b59',1);
+}
+
+function frontHair(c,p){
+  const h=p.hair;
+  if(p.hairStyle==='ponytail'){
+    // Чёлка только на верхней четверти лица. Боковые волосы не доходят до подбородка.
+    block(c,-12,-60,24,8,[8,8,2,2],h);
+    polygon(c,[[-12,-54],[3,-55],[-7,-50],[-12,-48]],h);
+    block(c,-12,-54,3,6,1,h);
+  }else if(p.hairStyle==='bun'){
+    block(c,-12,-59,24,8,[8,8,2,2],h);
+    polygon(c,[[2,-54],[12,-54],[10,-49],[6,-50]],h);
+    stroke(c,[[-8,-55],[0,-53]],'#765044',1);
+  }else if(p.hairStyle==='bob'){
+    block(c,-12,-59,24,9,[8,8,2,2],h);
+    polygon(c,[[-12,-54],[5,-55],[-6,-49],[-12,-49]],h);
+    block(c,8,-52,4,7,2,h);
+    // Контрастная маленькая заколка вместо массивной пряди.
+    block(c,7,-53,5,2,1,'#ffca4d');
+  }else if(p.hairStyle==='messy'){
+    block(c,-12,-58,24,8,[8,8,1,1],h);
+    block(c,-10,-61,8,6,2,h);
+    block(c,1,-63,7,7,2,h);
+  }else if(p.hairStyle==='spiky'){
+    block(c,-12,-58,24,8,[8,8,1,1],h);
+    for(const x of [-8,0,8])polygon(c,[[x-4,-55],[x,-65],[x+5,-55]],h);
+  }else{
+    block(c,-12,-58,24,9,[8,8,1,1],h);
+  }
+}
+
+function features(c,p){
+  // Выразительные глаза. Очки — тонкая геометрическая оправа.
+  block(c,-6,-45.5,2,2.8,1,'#25232a');
+  block(c,4,-45.5,2,2.8,1,'#25232a');
+  if(p.accessory==='glasses'){
+    c.strokeStyle='#29232d';c.lineWidth=1.1;
+    c.strokeRect(-9,-48,8,6);c.strokeRect(1,-48,8,6);
+    stroke(c,[[-1,-46],[1,-46]],'#29232d',1.1);
+    stroke(c,[[-9,-46],[-12,-47]],'#29232d',1);
+    stroke(c,[[9,-46],[12,-47]],'#29232d',1);
+  }
+  if(p.accessory==='headphones'){
+    c.strokeStyle='#25232a';c.lineWidth=2.5;
+    c.beginPath();c.arc(0,-47,13,Math.PI*1.1,Math.PI*1.9);c.stroke();
+    block(c,-14,-48,3,9,1,'#282a33');
+    block(c,11,-48,3,9,1,'#282a33');
+  }else if(p.accessory==='cap'){
+    block(c,-12,-60,24,7,3,'#1f2633');
+    block(c,6,-56,13,4,2,'#353d4f');
+  }else if(p.accessory==='scarf'){
+    // Шарф на ГРУДИ, не на подбородке.
+    block(c,-8,-35,17,4,2,'#d3f2ff');
+    block(c,7,-34,4,11,2,'#e8faff');
+  }
+}
+
+function drawStudent(c,p,x,feet,{scale=1,facing=1,step=0,opacity=1}={}){
+  if(!p)return;
+  c.save();c.translate(x,feet);c.scale(scale*facing,scale);c.globalAlpha*=opacity;
+  ellipse(c,0,1,17,3.5,'#00000044');
+  backHair(c,p);
+  clothes(c,p,step);
+  head(c,p);
+  frontHair(c,p);
+  features(c,p);
+  c.restore();
+}
+
+// ---- Level.js ----
+// Deterministic, bounded procedural levels. All mandatory items are on the main traversable route.
+const H=600;
+const GROUND_Y=506;
+const cap=(x,a,b)=>Math.max(a,Math.min(b,x));
+function randomFor(seed){let s=seed>>>0;return ()=>{s+=0x6D2B79F5;let t=s;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296;};}
+function difficultyOf(n){
+  if(n===1)return {name:'ПЕРВАЯ ПАРА',color:'#d5ff50',note:'Тренировка: обычные платформы и первые практические'};
+  if(n<=3)return {name:'ЛАБОРАТОРНАЯ',color:'#83b6fa',note:'Появились движущиеся платформы'};
+  if(n<=5)return {name:'КОНТРОЛЬНАЯ',color:'#ffca4d',note:'Летающие сессии и перемещающиеся ловушки'};
+  if(n<=8)return {name:'ЗАЧЁТНАЯ НЕДЕЛЯ',color:'#ff7b68',note:'Хрупкие платформы, патрули и комбинации ловушек'};
+  if(n<=12)return {name:'СЕССИЯ',color:'#b99af7',note:'Длинный маршрут, больше работ и опасностей'};
+  return {name:'БЕСКОНЕЧНЫЙ ЭКЗАМЕН',color:'#50dab8',note:'Новые комбинации, максимальная концентрация'};
+}
+const itemCount=(n)=>({books:Math.min(9,3+Math.floor((n-1)/2)),stars:Math.min(7,2+Math.floor((n-1)/3))});
+function generateLevel(stage,seed=2026){
+  const n=Math.max(1,Math.floor(stage)),rng=randomFor((Math.imul(n,7919)+seed)>>>0);
+  const pick=(a)=>a[Math.floor(rng()*a.length)];
+  const count=Math.min(25,8+Math.floor((n-1)*1.05));
+  const requirements=itemCount(n),needed=requirements.books+requirements.stars;
+  let right=335,priorY=GROUND_Y;
+  const grounds=[{id:'ground-start',x:0,y:GROUND_Y,w:335,h:120,kind:'ground',dx:0,dy:0}];
+  const platforms=[];
+  for(let i=0;i<count;i++){
+    // Even on a difficult level, maximum jump range is far greater than the bound.
+    const gap=42+rng()*(Math.min(113,54+n*3)-42);
+    const width=Math.round(cap(194-Math.min(44,n*2.3)+rng()*27,145,220));
+    const y=Math.round(cap(i===0?466:priorY+(rng()*2-1)*Math.min(54,22+n*3),406,496));
+    const p={id:`platform-${i}`,index:i,x:Math.round(right+gap),y,w:width,h:23,kind:'platform',baseX:0,baseY:0,motion:'none',amp:0,speed:0,phase:rng()<.5?0:Math.PI,dx:0,dy:0,fragile:false,crumble:0,broken:false};
+    p.baseX=p.x;p.baseY=p.y;
+    // Keep every third island stable to guarantee a rest point and prevent trap chains.
+    if(n>=2&&i>0&&i%3!==0&&rng()<Math.min(.55,.15+n*.043)){
+      p.motion=n>=3 && (i%2===0||rng()<.33)?'vertical':'horizontal';
+      p.amp=p.motion==='vertical'?Math.min(25,12+n*.8):Math.min(32,16+n*1.1);
+      p.speed=cap(.6+n*.055+rng()*.25,.7,1.7);
+    }
+    platforms.push(p);priorY=y;right=p.x+p.w;
+  }
+  const finishX=Math.round(right+60);
+  grounds.push({id:'ground-finish',x:finishX,y:GROUND_Y,w:355,h:120,kind:'ground',dx:0,dy:0});
+  const worldWidth=finishX+355;
+  // Distribute tasks over the entire course. Never put required items on fragile platforms.
+  const selected=[];
+  for(let j=0;j<needed;j++){
+    let idx=cap(Math.round(j*(count-1)/Math.max(1,needed-1)),0,count-1);
+    while(selected.includes(idx)&&idx<count-1)idx++;
+    while(selected.includes(idx)&&idx>0)idx--;
+    selected.push(idx);
+  }
+  const requiredSet=new Set(selected);
+  const collectibles=[];
+  selected.forEach((index,j)=>{
+    const p=platforms[index];
+    const type=j<requirements.books?'book':'star';
+    collectibles.push({id:`${type}-${j}`,type,platformId:p.id,offsetX:p.w/2,yOffset:-32,x:p.x+p.w/2,y:p.y-32,taken:false,title:type==='book'?`Практическая №${j+1}`:`Контрольная №${j-requirements.books+1}`});
+  });
+  const enemies=[],spikes=[],flyers=[],bonuses=[];
+  for(let i=0;i<count;i++){
+    const p=platforms[i],mandatory=requiredSet.has(i);
+    // Collectible islands remain safe from platform-top hazards; flyers may cross nearby.
+    if(!mandatory&&n>=4&&rng()<Math.min(.75,.28+n*.024)){
+      const type=i%3===0?'patrol':'spike';
+      if(type==='spike'){
+        const w=33,h=15,span=Math.max(0,(p.w-w)/2-18);
+        const phase=rng()*6.28,amp=span*.72,offsetX=p.w/2-w/2;
+        spikes.push({id:`spike-${i}`,platformId:p.id,offsetX,x:p.x+offsetX+Math.sin(phase)*amp,y:p.y-h,w,h,moving:true,amp,speed:cap(1+n*.08+rng()*.5,1.2,3),phase});
+      }else{
+        const phase=rng()*6.28,amp=Math.max(16,(p.w-55)/2),offsetX=p.w/2-13;
+        enemies.push({id:`patrol-${i}`,platformId:p.id,offsetX,x:p.x+offsetX+Math.sin(phase)*amp,y:p.y-27,w:26,h:27,amp,speed:cap(1+n*.11+rng()*.5,1,3.3),phase,alive:true});
+      }
+    }
+    if(!mandatory&&n>=6&&i>1&&rng()<Math.min(.53,.12+n*.026))p.fragile=true;
+    if(n>=3&&i>=2&&i<count-1&&i%Math.max(2,5-Math.floor(n/5))===1){
+      const prev=platforms[i-1],x=(prev.baseX+prev.w+p.baseX)/2;
+      const originY=Math.min(prev.baseY,p.baseY)-64,ampX=Math.min(75,25+n*3),ampY=Math.min(30,12+n),phase=rng()*6.28;
+      flyers.push({id:`session-${i}`,originX:x,originY,x:x+Math.sin(phase)*ampX,y:originY+Math.cos(phase)*ampY,w:42,h:30,ampX,ampY,speed:cap(.8+n*.06+rng()*.45,.9,2.8),phase});
+    }
+    // Optional bonuses can appear even on task platforms, safely above the surface.
+    if(i>0&&i<count-1&&rng()<Math.min(.58,.25+n*.025)){
+      const type=pick(['coffee','scholarship','shield','scholarship']);
+      const off=p.w*(mandatory?.24:.45);
+      bonuses.push({id:`bonus-${i}`,type,platformId:p.id,offsetX:off,x:p.x+off,y:p.y-78,yOffset:-78,taken:false});
+    }
+  }
+  // Every fifth level is a mini-exam: a much larger flying "Session" guards the last stretch.
+  if(n%5===0){
+    const ix=Math.min(count-2,Math.max(2,Math.floor(count*.72)));
+    const before=platforms[ix-1],after=platforms[ix],originX=(before.baseX+before.w+after.baseX)/2;
+    const originY=Math.min(before.baseY,after.baseY)-91,phase=.8,ampX=62,ampY=23;
+    flyers.push({id:'session-boss',boss:true,originX,originY,x:originX+Math.sin(phase)*ampX,y:originY+Math.cos(phase)*ampY,w:68,h:44,ampX,ampY,speed:1.15+Math.min(.7,n*.035),phase});
+  }
+  // Advanced stages always show the key mechanics (otherwise randomness could make them feel identical).
+  if(n>=2&&!platforms.some(p=>p.motion==='horizontal')){const p=platforms[1];p.motion='horizontal';p.amp=22;p.speed=1.1;}
+  if(n>=3&&!platforms.some(p=>p.motion==='vertical')){const p=platforms[2];p.motion='vertical';p.amp=18;p.speed=1.0;}
+  if(n>=4&&!spikes.length){const p=platforms.find((p,i)=>i>0&&!requiredSet.has(i));if(p)spikes.push({id:'spike-required',platformId:p.id,offsetX:p.w/2-16,x:p.x+p.w/2-16,y:p.y-15,w:32,h:15,moving:true,amp:30,speed:1.8,phase:0});}
+  if(n>=6&&!platforms.some(p=>p.fragile)){const p=platforms.find((p,i)=>i>1&&!requiredSet.has(i));if(p)p.fragile=true;}
+  const gaps=[];
+  const all=[...grounds,...platforms].sort((a,b)=>(a.baseX??a.x)-(b.baseX??b.x));
+  // Physical fall hazard between fixed *base* platforms; player also loses when beneath canvas.
+  for(let i=1;i<all.length;i++){
+    const prev=all[i-1],curr=all[i],end=(prev.baseX??prev.x)+prev.w,start=curr.baseX??curr.x;
+    if(start-end>10)gaps.push({x:end,y:566,w:start-end,h:34});
+  }
+  return {number:n,width:worldWidth,grounds,platforms,solids:[...grounds,...platforms],collectibles,bonuses,enemies,spikes,flyers,gaps,finishX,teacherX:finishX+218,requirements,requiredTotal:needed,difficulty:difficultyOf(n),parTime:Math.ceil(worldWidth/230)+12};
+}
+
+// ---- Player.js ----
+const ACCEL=2900,FRICTION=3200,GRAVITY=1550;
+const approach=(x,to,d)=>x<to?Math.min(to,x+d):Math.max(to,x-d);
+class Player{
+  constructor(x,y){this.spawnX=x;this.spawnY=y;this.w=32;this.h=46;this.reset();}
+  reset(){this.x=this.spawnX;this.y=this.spawnY;this.vx=0;this.vy=0;this.grounded=true;this.support=null;this.facing=1;this.stepTime=0;this.jumpBuffer=0;this.coyote=.09;}
+  update(dt,input,solids,width,character){
+    // A moving platform carries the student both horizontally and vertically.
+    if(this.grounded&&this.support&&!this.support.broken){
+      this.x+=this.support.dx||0;this.y+=this.support.dy||0;
+      this.y=this.support.y-this.h;
+    }
+    const direction=Number(input?.right)-Number(input?.left);
+    const speed=340;
+    this.vx=approach(this.vx,direction*speed,(direction?ACCEL:FRICTION)*dt);
+    if(direction)this.facing=direction;
+    if(input?.consumeJump())this.jumpBuffer=.12;
+    this.jumpBuffer=Math.max(0,this.jumpBuffer-dt);
+    this.coyote=this.grounded?.095:Math.max(0,this.coyote-dt);
+    if(this.jumpBuffer>0&&this.coyote>0){this.vy=-(character?.power==='jump'?621:580);this.grounded=false;this.support=null;this.coyote=0;this.jumpBuffer=0;}
+    this.vy=Math.min(1100,this.vy+GRAVITY*dt);
+    this.support=moveWithCollisions(this,solids,dt,width);
+    this.grounded=!!this.support;
+    this.stepTime=this.grounded&&Math.abs(this.vx)>25?this.stepTime+dt*17:0;
+  }
+}
+
+// ---- Game.js ----
+const CW=1120,KEY='web-quest-campus-v3';
+const C={bg:'#181818',panel:'#262626',stroke:'#484848',ink:'#f2f2f2',muted:'#aaa',lime:'#d5ff50',coral:'#ff7b68',violet:'#b99af7',blue:'#83b6fa',mint:'#50dab8',yellow:'#ffca4d'};
+const palette=[C.lime,C.mint,C.blue,C.violet,C.coral,C.yellow];
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const rnd=(a)=>String(a).padStart(2,'0');
+function rr(c,x,y,w,h,r,fill,stroke){c.beginPath();c.roundRect(x,y,w,h,r);if(fill){c.fillStyle=fill;c.fill();}if(stroke){c.lineWidth=1;c.strokeStyle=stroke;c.stroke();}}
+function tx(c,s,x,y,size=14,col=C.ink,weight=700,align='left'){c.font=`${weight} ${size}px Inter, -apple-system, Arial, sans-serif`;c.textAlign=align;c.fillStyle=col;c.fillText(s,x,y);c.textAlign='left';}
+function star(c,x,y,r,color){c.beginPath();for(let i=0;i<10;i++){let a=i*Math.PI/5-Math.PI/2,k=i%2?.44:1;if(i===0)c.moveTo(x+Math.cos(a)*r*k,y+Math.sin(a)*r*k);else c.lineTo(x+Math.cos(a)*r*k,y+Math.sin(a)*r*k);}c.closePath();c.fillStyle=color;c.fill();}
+const gradeFor=(score,total)=>{const p=score/Math.max(1,total);return p>=1?5:p>=.8?4:p>=.6?3:p>=.4?2:1;};
+class Game{
+  constructor(canvas,onChange=()=>{}){
+    this.canvas=canvas;this.ctx=canvas.getContext('2d');if(!this.ctx)throw Error('Canvas 2D недоступен');
+    this.onChange=onChange;this.input=null;this.record=this.loadRecord();
+    this.stage=1;this.bank=0;this.streak=0;this.character=CHARACTERS.find(x=>x.id===this.record.characterId)||CHARACTERS[0];
+    this.player=new Player(90,GROUND_Y-46);this.rafId=null;this.lastTime=null;this.state='ready';this.result=null;this.cameraX=0;
+    this.resize=()=>{const box=canvas.getBoundingClientRect();this.viewWidth=clamp(H*(box.width/Math.max(1,box.height)),500,1420);this.cameraX=clamp(this.cameraX,0,Math.max(0,this.level.width-this.viewWidth));this.render();};
+    this.buildLevel();
+    if(typeof ResizeObserver!=='undefined')this.resizeObserver=new ResizeObserver(this.resize),this.resizeObserver.observe(canvas);
+    else window.addEventListener('resize',this.resize);
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)this.pause();});
+    window.addEventListener('blur',()=>this.pause());
+    this.resize();this.emit();
+  }
+  setInput(i){this.input=i;}
+  loadRecord(){try{const r=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('web-quest-infinite-v2')||'{}');return {bestLevel:clamp(Math.floor(Number(r.bestLevel)||1),1,999999),bestPoints:Math.max(0,Number(r.bestPoints)||0),bestStreak:Math.max(0,Number(r.bestStreak)||0),characterId:String(r.characterId||'kirill')};}catch{return {bestLevel:1,bestPoints:0,bestStreak:0,characterId:'kirill'};}}
+  saveRecord(){this.record.bestLevel=Math.max(this.record.bestLevel,this.stage);this.record.bestPoints=Math.max(this.record.bestPoints,this.bank);this.record.bestStreak=Math.max(this.record.bestStreak,this.streak);this.record.characterId=this.character.id;try{localStorage.setItem(KEY,JSON.stringify(this.record));}catch{/* private browsing / storage unavailable */}}
+  get counts(){let books=0,stars=0;for(const item of this.level.collectibles){if(item.taken){if(item.type==='book')books++;else stars++;}}return {books,stars,total:books+stars,required:this.level.requiredTotal,allBooks:this.level.requirements.books,allStars:this.level.requirements.stars};}
+  get nextGrade(){return gradeFor(this.counts.total,this.level.requiredTotal);}
+  get minToPass(){return Math.ceil(this.level.requiredTotal*.6);}
+  buildLevel(){
+    this.level=generateLevel(this.stage);this.player.reset();this.cameraX=0;this.levelTime=0;this.hazardClock=0;
+    this.result=null;this.popups=[];this.particles=[];this.stomps=0;this.bonusCount=0;this.stagePoints=0;
+    this.shields=this.character.power==='shield'?1:0;this.reviveAvailable=this.character.power==='revive';
+    this.coffeeTimer=0;this.invincible=0;this.combo=0;this.comboTimer=0;this.checkpoint={x:90,y:GROUND_Y-46};this.lastHudSecond=-1;
+    this.emit();this.render();
+  }
+  chooseCharacter(id){const who=CHARACTERS.find(x=>x.id===id);if(!who)return;
+    this.cancelLoop();this.input?.clear();this.character=who;this.state='ready';this.buildLevel();this.saveRecord();this.emit();
+  }
+  emit(){if(!this.level)return;this.onChange({state:this.state,stage:this.stage,counts:this.counts,record:{...this.record},result:this.result,bank:this.bank,stagePoints:this.stagePoints,streak:this.streak,character:this.character,difficulty:this.level.difficulty,time:this.levelTime,par:this.level.parTime,shields:this.shields,coffee:this.coffeeTimer,combo:this.combo,bonusCount:this.bonusCount,passAt:this.minToPass});}
+  cancelLoop(){if(this.rafId!==null)cancelAnimationFrame(this.rafId);this.rafId=null;this.lastTime=null;}
+  startLoop(){if(this.rafId===null)this.rafId=requestAnimationFrame(t=>this.frame(t));}
+  run(){if(this.state==='running')return;
+    if(this.state==='won'){this.stage++;this.state='ready';this.buildLevel();}
+    else if(this.state==='failed'){this.state='ready';this.buildLevel();}
+    this.input?.clear();this.lastTime=null;this.state='running';this.saveRecord();this.emit();this.startLoop();
+  }
+  pause(){if(this.state!=='running')return;this.state='paused';this.cancelLoop();this.input?.clear();this.emit();this.render();}
+  restart(){this.cancelLoop();this.input?.clear();this.state='ready';this.buildLevel();this.run();}
+  startOver(){this.cancelLoop();this.input?.clear();this.stage=1;this.bank=0;this.streak=0;this.state='ready';this.buildLevel();this.run();}
+  startFromRecord(){this.cancelLoop();this.input?.clear();this.stage=this.record.bestLevel;this.bank=0;this.streak=0;this.state='ready';this.buildLevel();this.run();}
+  centerCameraOnPlayer(){this.cameraX=clamp(this.player.x-this.viewWidth*.34,0,Math.max(0,this.level.width-this.viewWidth));}
+  prepareFailureView(reason){const p=this.player;if(reason==='teacher'){p.x=Math.max(90,Math.min(this.level.teacherX-130,this.checkpoint.x));p.y=GROUND_Y-46;}else{p.x=this.checkpoint.x;p.y=this.checkpoint.y;}p.vx=0;p.vy=0;p.grounded=true;p.support=null;p.coyote=.095;this.centerCameraOnPlayer();}
+  finish(reason){if(this.state!=='running')return;
+    const score=this.counts.total,total=this.level.requiredTotal,grade=reason==='teacher'?gradeFor(score,total):null;
+    const passed=reason==='teacher'&&grade>=3;
+    let points=0;
+    if(passed){points=this.stagePoints+score*85+this.stomps*60+Math.max(0,Math.floor((this.level.parTime-this.levelTime)*12))+(grade===5?250:0);
+      this.bank+=points;this.streak=grade===5?this.streak+1:0;this.record.bestLevel=Math.max(this.record.bestLevel,this.stage+1);
+    }else this.streak=0;
+    this.result={grade,score,total,reason,passed,points,bonuses:this.bonusCount,seconds:Math.floor(this.levelTime)};
+    this.state=passed?'won':'failed';if(!passed)this.prepareFailureView(reason);this.saveRecord();this.input?.clear();this.emit();this.render();
+  }
+  frame(t){this.rafId=null;if(this.state!=='running')return;const dt=this.lastTime===null?0:clamp((t-this.lastTime)/1000,0,.03);this.lastTime=t;
+    this.update(dt);this.render();if(this.state==='running')this.startLoop();}
+  popup(x,y,label,color=C.lime){this.popups.push({x,y,label,color,life:1.15});}
+  spark(x,y,color){for(let i=0;i<10;i++){const a=i*Math.PI/5;this.particles.push({x,y,vx:Math.cos(a)*(30+i%3*18),vy:Math.sin(a)*(24+i%4*12),life:.5+Math.random()*.25,color});}}
+  addPoints(amount){this.stagePoints+=amount;}
+  collect(item){item.taken=true;this.combo=this.comboTimer>0?Math.min(5,this.combo+1):1;this.comboTimer=5;
+    let points=30+(this.combo-1)*15;if(item.type==='book'&&this.character.power==='books')points=Math.round(points*1.3);
+    this.addPoints(points);this.popup(item.x,item.y-40,`+${points} / ${item.type==='book'?'ПРАКТИКА':'КОНТРОЛЬНАЯ'}`,item.type==='book'?C.coral:C.lime);
+    this.spark(item.x,item.y,item.type==='book'?C.coral:C.lime);
+    if(item.type==='star')this.checkpoint={x:Math.max(0,item.x-23),y:Math.min(GROUND_Y-46,item.y-14)};
+    this.emit();
+  }
+  collectBonus(b){b.taken=true;this.bonusCount++;
+    const extra=this.character.power==='bonuses'?50:0;
+    let message='';
+    if(b.type==='coffee'){this.coffeeTimer=this.character.power==='coffee'?12:6;message='☕ КОФЕ / ЗАМЕДЛЕНИЕ';}
+    else if(b.type==='shield'){this.shields=Math.min(2,this.shields+1);message='◈ АВТОСОХРАНЕНИЕ / ЩИТ';}
+    else message='✦ СТИПЕНДИЯ / +150';
+    const amount=(b.type==='scholarship'?150:55)+extra;this.addPoints(amount);this.popup(b.x,b.y-25,`+${amount} / ${message}`,C.mint);this.spark(b.x,b.y,C.mint);this.emit();
+  }
+  hit(reason){if(this.invincible>0||this.state!=='running')return;
+    if(reason!=='fall'&&this.shields>0){this.shields--;this.invincible=1.6;this.player.vy=-290;this.player.grounded=false;this.player.support=null;
+      this.popup(this.player.x+12,this.player.y-12,'ЩИТ СПАС ОТ ПЕРЕСДАЧИ',C.mint);this.emit();return;}
+    if(this.reviveAvailable){this.reviveAvailable=false;const p=this.player;p.x=this.checkpoint.x;p.y=this.checkpoint.y;p.vx=0;p.vy=0;p.grounded=false;p.support=null;p.coyote=0;this.invincible=2.2;
+      this.popup(p.x+15,p.y-20,'ВОССТАНОВЛЕН / ЕЩЁ ОДИН ШАНС',C.blue);this.emit();return;}
+    this.finish(reason);
+  }
+  update(dt){
+    if(!dt)return;
+    const lv=this.level,p=this.player;this.levelTime+=dt;this.coffeeTimer=Math.max(0,this.coffeeTimer-dt);
+    this.invincible=Math.max(0,this.invincible-dt);this.comboTimer=Math.max(0,this.comboTimer-dt);if(this.comboTimer===0)this.combo=0;
+    this.hazardClock+=dt*(this.coffeeTimer>0?.48:1);
+    // Moving platforms first, then all objects attached to them.
+    for(const s of lv.platforms){s.dx=0;s.dy=0;if(s.broken)continue;
+      const prevX=s.x,prevY=s.y;
+      if(s.motion==='horizontal')s.x=s.baseX+Math.sin(this.levelTime*s.speed+s.phase)*s.amp;
+      else if(s.motion==='vertical')s.y=s.baseY+Math.sin(this.levelTime*s.speed+s.phase)*s.amp;
+      s.dx=s.x-prevX;s.dy=s.y-prevY;
+    }
+    const index=new Map(lv.platforms.map(s=>[s.id,s]));
+    for(const item of [...lv.collectibles,...lv.bonuses]){const s=index.get(item.platformId);if(!s)continue;item.x=s.x+item.offsetX;item.y=s.y+item.yOffset;}
+    for(const e of lv.enemies){const s=index.get(e.platformId);if(!s)continue;e.x=s.x+e.offsetX+Math.sin(this.hazardClock*e.speed+e.phase)*e.amp;e.y=s.y-e.h;}
+    for(const s of lv.spikes){const p=index.get(s.platformId);if(!p)continue;s.x=p.x+s.offsetX+(s.moving?Math.sin(this.hazardClock*s.speed+s.phase)*s.amp:0);s.y=p.y-s.h;}
+    for(const f of lv.flyers){f.x=f.originX+Math.sin(this.hazardClock*f.speed+f.phase)*f.ampX;f.y=f.originY+Math.cos(this.hazardClock*f.speed*.9+f.phase)*f.ampY;}
+    // Breakable platforms count contact time. They are intentionally never required for item collection.
+    for(const s of lv.platforms){if(!s.fragile||s.broken)continue;
+      if(p.grounded&&p.support===s)s.crumble+=dt;
+      if(s.crumble>.88){s.broken=true;if(p.support===s){p.support=null;p.grounded=false;}this.popup(s.x+s.w/2,s.y-20,'РАБОТА НЕ СОХРАНЕНА',C.coral);}
+    }
+    const prevBottom=p.y+p.h;
+    p.update(dt,this.input,lv.solids.filter(s=>!s.broken),lv.width,this.character);
+    for(const i of lv.collectibles){if(i.taken)continue;
+      if(intersects(p,{x:i.x-21,y:i.y-22,w:42,h:44}))this.collect(i);
+    }
+    for(const b of lv.bonuses){if(b.taken)continue;
+      if(intersects(p,{x:b.x-18,y:b.y-18,w:36,h:36}))this.collectBonus(b);
+    }
+    if(this.invincible<=0){
+      for(const e of lv.enemies){if(!e.alive||!intersects(p,e))continue;
+        if(p.vy>90&&prevBottom<=e.y+12){e.alive=false;p.vy=-425;p.grounded=false;p.support=null;this.stomps++;this.addPoints(65);this.popup(e.x+13,e.y-21,'+65 / ДЕДЛАЙН ЗАКРЫТ',C.mint);}
+        else{this.hit('enemy');if(this.state!=='running')return;break;}}
+      for(const s of lv.spikes){if(intersects(p,{x:s.x+3,y:s.y+3,w:s.w-6,h:s.h-3})){this.hit('spikes');if(this.state!=='running')return;break;}}
+      for(const f of lv.flyers){if(intersects(p,{x:f.x+3,y:f.y+3,w:f.w-6,h:f.h-6})){this.hit('session');if(this.state!=='running')return;break;}}
+    }
+    if(p.y>H+25){this.hit('fall');if(this.state!=='running')return;}
+    // Finish is only reachable from the final ground segment.
+    if(intersects(p,{x:lv.teacherX-39,y:GROUND_Y-114,w:88,h:114})){this.finish('teacher');return;}
+    for(const pop of this.popups){pop.life-=dt;pop.y-=dt*32;}this.popups=this.popups.filter(x=>x.life>0);
+    for(const s of this.particles){s.life-=dt;s.x+=s.vx*dt;s.y+=s.vy*dt;s.vy+=dt*55;}this.particles=this.particles.filter(x=>x.life>0);
+    const target=clamp(p.x-this.viewWidth*.34,0,Math.max(0,lv.width-this.viewWidth));this.cameraX+=(target-this.cameraX)*Math.min(1,dt*8);
+    if(Math.floor(this.levelTime)!==this.lastHudSecond){this.lastHudSecond=Math.floor(this.levelTime);this.emit();}
+  }
+  visible(x,w){return x+w>this.cameraX-60&&x<this.cameraX+this.viewWidth+60;}
+  render(){if(!this.ctx||!this.level||!this.viewWidth)return;const c=this.ctx,V=this.viewWidth;
+    c.setTransform(CW/V,0,0,1,0,0);c.clearRect(0,0,V,H);this.drawBackground(c,V);
+    c.save();c.translate(-Math.round(this.cameraX),0);
+    this.drawGaps(c);this.drawPlatforms(c);this.drawSpikes(c);this.drawItems(c);this.drawFlyers(c);this.drawEnemies(c);this.drawTeacher(c);this.drawPlayer(c);this.drawFX(c);c.restore();this.drawHud(c,V);
+  }
+  drawBackground(c,V){c.fillStyle=C.bg;c.fillRect(0,0,V,H);
+    c.strokeStyle='#303030';c.lineWidth=1;c.beginPath();for(let x=-(this.cameraX*.12)%54;x<V;x+=54){c.moveTo(x,0);c.lineTo(x,H);}for(let y=0;y<H;y+=54){c.moveTo(0,y);c.lineTo(V,y);}c.stroke();
+    const offset=-(this.cameraX*.2)%700;
+    for(let i=-1;i<=V/700+1;i++){const x=offset+i*700;tx(c,'WEB',x+28,293,180,'#242424',900);tx(c,'/ DESIGN',x+40,356,44,'#272727',900);
+      rr(c,x+454,377,152,140,12,'#202020','#2d2d2d');rr(c,x+472,406,52,45,7,'#292929');rr(c,x+536,406,52,45,7,'#292929');tx(c,'ЛЕКЦИЯ',x+474,476,10,'#484848',900);}
+    rr(c,0,544,V,2,0,'#3a3a3a');tx(c,'//  СПБГУПТД — ПРАКТИЧЕСКИЕ РАБОТЫ В РЕЖИМЕ ВЫЖИВАНИЯ',18,580,10,'#555',800);
+  }
+  drawGaps(c){for(const g of this.level.gaps){if(!this.visible(g.x,g.w))continue;
+    rr(c,g.x,g.y,g.w,g.h,0,'#552c29');rr(c,g.x,g.y,g.w,5,0,C.coral);
+    for(let x=g.x+6;x<g.x+g.w-10;x+=26){c.fillStyle='#ad5447';c.beginPath();c.moveTo(x,g.y+23);c.lineTo(x+10,g.y+9);c.lineTo(x+20,g.y+23);c.fill();}
+  }}
+  drawPlatforms(c){for(const s of this.level.solids){if(s.broken||!this.visible(s.x,s.w))continue;
+    const ground=s.kind==='ground';
+    rr(c,s.x,s.y,s.w,s.h,ground?5:7,ground?'#2a2a2a':'#303030','#575757');
+    const top=s.fragile?C.violet:ground?C.lime:s.motion==='vertical'?C.mint:s.motion==='horizontal'?C.blue:palette[(s.index||0)%palette.length];
+    rr(c,s.x,s.y,s.w,ground?8:8,ground?3:4,top);
+    if(ground){for(let x=s.x+22;x<s.x+s.w-9;x+=48){rr(c,x,s.y+29,23,4,2,'#404040');rr(c,x,s.y+49,23,4,2,'#404040');}
+      tx(c,'СПБГУПТД / КАМПУС',s.x+16,s.y+81,10,'#727272',800);}
+    else{rr(c,s.x+12,s.y+14,Math.max(20,s.w-24),2,0,'#494949');
+      const label=s.fragile?'ХРУПКАЯ':s.motion==='vertical'?'ЛИФТ ↑↓':s.motion==='horizontal'?'ПОДВИЖНАЯ ↔':'ПЛАТФОРМА';
+      tx(c,`${rnd(s.index+1)} / ${label}`,s.x+11,s.y+37,9,'#b4b4b4',800);
+      if(s.motion!=='none'){const cx=s.baseX+s.w/2,cy=s.baseY;
+        c.save();c.strokeStyle='#777777';c.setLineDash([4,5]);c.beginPath();if(s.motion==='horizontal'){c.moveTo(cx-s.amp,cy+48);c.lineTo(cx+s.amp,cy+48);}else{c.moveTo(cx,cy-s.amp-13);c.lineTo(cx,cy+s.amp+27);}c.stroke();c.restore();}
+      if(s.fragile&&s.crumble>0){rr(c,s.x,s.y-7,s.w*clamp(s.crumble/.88,0,1),4,2,C.coral);}
+    }
+  }}
+  drawSpikes(c){for(const s of this.level.spikes){if(!this.visible(s.x,s.w))continue;
+    rr(c,s.x,s.y+12,s.w,3,1,C.coral);
+    for(let i=0;i<4;i++){const x=s.x+i*s.w/4;c.fillStyle=C.coral;c.beginPath();c.moveTo(x,s.y+14);c.lineTo(x+s.w/8,s.y);c.lineTo(x+s.w/4,s.y+14);c.fill();}
+    if(s.moving)tx(c,'↔',s.x+s.w/2,s.y-7,13,C.coral,900,'center');
+  }}
+  drawItems(c){for(const b of [...this.level.collectibles,...this.level.bonuses]){if(b.taken||!this.visible(b.x-30,60))continue;
+    const y=b.y+Math.sin(this.levelTime*3+b.x*.05)*4,bonus=['coffee','shield','scholarship'].includes(b.type),color=b.type==='book'?C.coral:b.type==='star'?C.lime:C.mint;
+    c.save();c.shadowColor=color;c.shadowBlur=18;c.beginPath();c.arc(b.x,y,22,0,Math.PI*2);c.fillStyle=color+'22';c.fill();c.shadowBlur=0;
+    if(b.type==='book'){rr(c,b.x-12,y-14,24,28,3,C.coral);rr(c,b.x-12,y-14,6,28,1,'#bf554b');for(let k=0;k<3;k++)rr(c,b.x-2,y-7+k*8,10,2,1,'#272727');}
+    else if(b.type==='star'){star(c,b.x,y,17,C.lime);star(c,b.x,y,6,'#202020');}
+    else if(b.type==='coffee'){rr(c,b.x-11,y-10,19,23,4,C.mint);c.strokeStyle=C.mint;c.lineWidth=3;c.beginPath();c.arc(b.x+9,y-1,7,-Math.PI/2,Math.PI/2);c.stroke();tx(c,'☕',b.x-1,y+5,15,'#161616',900,'center');}
+    else if(b.type==='shield'){rr(c,b.x-14,y-14,28,29,7,C.blue);tx(c,'◈',b.x,y+6,23,'#171717',900,'center');}
+    else{star(c,b.x,y,15,C.yellow);tx(c,'₽',b.x,y+6,13,'#1c1c1c',900,'center');}
+    c.restore();
+  }}
+  drawFlyers(c){for(const f of this.level.flyers){if(!this.visible(f.x,f.w))continue;
+    c.save();c.shadowBlur=f.boss?29:19;c.shadowColor=f.boss?'#ffca4d99':'#b99af77d';rr(c,f.x,f.y,f.w,f.h,7,f.boss?C.yellow:C.violet);c.shadowBlur=0;
+    c.fillStyle=f.boss?'#bd8548':'#70568e';c.beginPath();c.moveTo(f.x+2,f.y+9);c.lineTo(f.x-17,f.y);c.lineTo(f.x-9,f.y+20);c.fill();c.beginPath();c.moveTo(f.x+f.w-2,f.y+9);c.lineTo(f.x+f.w+17,f.y);c.lineTo(f.x+f.w+9,f.y+20);c.fill();
+    tx(c,f.boss?'EXAM':'С',f.x+f.w/2,f.y+(f.boss?30:23),f.boss?18:25,'#23172e',900,'center');
+    rr(c,f.x-17,f.y-24,f.w+34,17,4,'#292331',f.boss?C.yellow:'#9c77be');tx(c,f.boss?'БОСС / СЕССИЯ':'СЕССИЯ',f.x+f.w/2,f.y-12,10,f.boss?C.yellow:C.violet,900,'center');c.restore();
+  }}
+  drawEnemies(c){for(const e of this.level.enemies){if(!e.alive||!this.visible(e.x,e.w))continue;
+    c.save();c.shadowBlur=15;c.shadowColor='#ff7b6870';rr(c,e.x,e.y,e.w,e.h,5,C.coral);c.shadowBlur=0;
+    rr(c,e.x+5,e.y+7,4,5,1,C.bg);rr(c,e.x+17,e.y+7,4,5,1,C.bg);tx(c,'!',e.x+e.w/2,e.y-9,13,C.coral,900,'center');c.restore();
+  }}
+  drawTeacher(c){const x=this.level.teacherX,y=GROUND_Y;if(!this.visible(x-130,260))return;
+    rr(c,x-96,y-180,196,35,8,C.lime);tx(c,'ФИНИШ / АТТЕСТАЦИЯ',x+2,y-157,13,'#171717',900,'center');
+    rr(c,x-12,y-68,36,60,7,'#dedede');rr(c,x-22,y-88,50,44,7,'#414141');rr(c,x-13,y-74,34,22,3,C.lime);tx(c,'5?',x+3,y-57,18,'#272727',900,'center');
+    rr(c,x-6,y-120,34,35,14,'#e9b68e');rr(c,x-7,y-122,35,12,[8,8,1,1],'#202020');rr(c,x+2,y-107,3,3,2,'#1a1a1a');rr(c,x+17,y-107,3,3,2,'#1a1a1a');
+    rr(c,x-30,y-11,68,11,3,'#616161');rr(c,x-112,y+13,235,27,6,C.panel,C.stroke);tx(c,'КОКОРИН ЕВГЕНИЙ СЕРГЕЕВИЧ',x+5,y+31,10,C.ink,900,'center');
+  }
+  drawPlayer(c){const p=this.player,step=p.grounded&&Math.abs(p.vx)>24?Math.sin(p.stepTime)*4:0;
+    if(this.invincible>0&&Math.floor(this.levelTime*14)%2===0)return;
+    drawStudent(c,this.character,Math.round(p.x+p.w/2),Math.round(p.y+p.h),{facing:p.facing,step});
+    if(this.shields>0){c.save();c.strokeStyle=C.blue;c.lineWidth=2;c.setLineDash([5,5]);c.beginPath();c.ellipse(p.x+16,p.y+21,27,35,0,0,Math.PI*2);c.stroke();c.restore();}
+    if(this.coffeeTimer>0){tx(c,'☕',p.x+16,p.y-12,18,C.mint,900,'center');}
+  }
+  drawFX(c){for(const pop of this.popups){if(pop.life<=0||!this.visible(pop.x-145,290))continue;c.save();c.globalAlpha=clamp(pop.life,0,1);
+    const w=Math.min(254,Math.max(123,pop.label.length*6.6));rr(c,pop.x-w/2,pop.y-17,w,30,6,'#252525',pop.color);tx(c,pop.label,pop.x,pop.y+3,10,pop.color,900,'center');c.restore();}
+    for(const p of this.particles){c.save();c.globalAlpha=Math.min(1,p.life*1.8);rr(c,p.x-2,p.y-2,4,4,1,p.color);c.restore();}
+  }
+  drawHud(c,V){rr(c,16,15,174,36,7,'#242424','#484848');tx(c,`УРОВЕНЬ ${rnd(this.stage)}`,29,38,13,C.ink,900);
+    rr(c,V-206,15,190,36,7,'#242424','#484848');tx(c,`РАБОТЫ ${this.counts.total} / ${this.level.requiredTotal}`,V-192,38,12,C.lime,900);
+    rr(c,V/2-43,15,86,36,7,'#242424','#484848');const time=Math.floor(this.levelTime);tx(c,`${rnd(Math.floor(time/60))}:${rnd(time%60)}`,V/2,39,14,C.ink,900,'center');
+    if(this.shields||this.coffeeTimer){const s=`${this.shields?'◈ ЩИТ ×'+this.shields:''} ${this.coffeeTimer?'☕ '+Math.ceil(this.coffeeTimer)+'с':''}`.trim();rr(c,V/2-85,57,170,27,5,'#2a2a2a','#555');tx(c,s,V/2,75,11,C.mint,900,'center');}
+    const progress=clamp(this.player.x/Math.max(1,this.level.teacherX),0,1);rr(c,16,H-30,V-32,5,2,'#494949');rr(c,16,H-30,(V-32)*progress,5,2,C.lime);rr(c,16+(V-32)*progress-5,H-34,10,12,3,C.coral);
+  }
+}
+
+// ---- input.js ----
+const LEFT = new Set(['ArrowLeft', 'KeyA']);
+const RIGHT = new Set(['ArrowRight', 'KeyD']);
+const JUMP = new Set(['Space', 'KeyW', 'ArrowUp']);
+const GAME_KEYS = new Set([...LEFT, ...RIGHT, ...JUMP]);
+
+class Input {
+  constructor(isGameActive) {
+    this.isGameActive = isGameActive;
+    this.pressedKeys = new Set();
+    this.pressedButtons = new Set();
+    this.jumpQueued = false;
+    this.touchButtons = [...document.querySelectorAll('[data-control]')];
+
+    window.addEventListener('keydown', (event) => this.onKeyDown(event));
+    window.addEventListener('keyup', (event) => this.onKeyUp(event));
+    window.addEventListener('blur', () => this.clear());
+    this.bindTouchControls();
+  }
+
+  get left() { return [...LEFT].some((key) => this.pressedKeys.has(key)) || this.pressedButtons.has('left'); }
+  get right() { return [...RIGHT].some((key) => this.pressedKeys.has(key)) || this.pressedButtons.has('right'); }
+
+  consumeJump() {
+    const requested = this.jumpQueued;
+    this.jumpQueued = false;
+    return requested;
+  }
+
+  onKeyDown(event) {
+    const editable = event.target instanceof HTMLElement &&
+      (event.target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName));
+    if (editable || !GAME_KEYS.has(event.code) || !this.isGameActive()) return;
+    event.preventDefault();
+    if (JUMP.has(event.code) && !this.pressedKeys.has(event.code)) this.jumpQueued = true;
+    this.pressedKeys.add(event.code);
+  }
+
+  onKeyUp(event) {
+    if (!GAME_KEYS.has(event.code)) return;
+    if (this.isGameActive()) event.preventDefault();
+    this.pressedKeys.delete(event.code);
+  }
+
+  bindTouchControls() {
+    for (const button of this.touchButtons) {
+      const action = button.dataset.control;
+      const release = (event) => {
+        event.preventDefault();
+        this.pressedButtons.delete(action);
+        button.classList.remove('is-pressed');
+      };
+      button.addEventListener('pointerdown', (event) => {
+        event.preventDefault();
+        if (!this.isGameActive()) return;
+        button.setPointerCapture?.(event.pointerId);
+        if (action === 'jump' && !this.pressedButtons.has('jump')) this.jumpQueued = true;
+        this.pressedButtons.add(action);
+        button.classList.add('is-pressed');
+      });
+      button.addEventListener('pointerup', release);
+      button.addEventListener('pointercancel', release);
+      button.addEventListener('lostpointercapture', release);
+      button.addEventListener('contextmenu', (event) => event.preventDefault());
+    }
+  }
+
+  clear() {
+    this.pressedKeys.clear();
+    this.pressedButtons.clear();
+    this.jumpQueued = false;
+    for (const button of this.touchButtons) button.classList.remove('is-pressed');
+  }
+}
+
+// ---- main.js ----
+const id=k=>document.getElementById(k);
+const keys=['gameCanvas','bookCount','starCount','bankCount','bestLevel','difficultyDot','difficultyText','levelDisplay','overlay','overlayKicker','overlayVisual','overlayTitle','overlayMessage','overlayFact1','overlayFact2','overlayButton','startButton','startButtonText','pauseButton','pauseButtonText','restartButton','resetButton','recordButton','statusLine','runTimer','streakCount','stagePoints','bonusCounter','shieldCount','passCount','characterGrid','selectedStudentName','selectedStudentPerk','characterHelp'];
+const d=Object.fromEntries(keys.map(k=>[k,id(k)]));
+const pad=n=>String(n).padStart(2,'0');
+let pinnedScrollY=window.scrollY||0, previousState='ready';
+const pinScroll=()=>{pinnedScrollY=window.scrollY||0;};
+const restoreScroll=()=>requestAnimationFrame(()=>window.scrollTo({top:pinnedScrollY,left:0,behavior:'auto'}));
+try{history.scrollRestoration='manual';}catch{}
+function refresh({state,stage,counts,record,result,bank,stagePoints,streak,character,difficulty,time,par,shields,coffee,bonusCount,passAt}){
+  d.bookCount.innerHTML=`${counts.books} <small>/ ${counts.allBooks}</small>`;
+  d.starCount.innerHTML=`${counts.stars} <small>/ ${counts.allStars}</small>`;
+  d.bankCount.textContent=bank.toLocaleString('ru-RU');
+  d.bestLevel.textContent=pad(record.bestLevel);
+  d.difficultyDot.style.background=difficulty.color;
+  d.difficultyText.textContent=difficulty.name;
+  d.levelDisplay.textContent=`УРОВЕНЬ ${pad(stage)}`;
+  d.runTimer.textContent=`${pad(Math.floor(time/60))}:${pad(Math.floor(time%60))}`;
+  d.streakCount.textContent=streak;
+  d.stagePoints.textContent=stagePoints.toLocaleString('ru-RU');
+  d.bonusCounter.textContent=bonusCount;
+  d.shieldCount.textContent=shields+(coffee?` · КОФЕ ${Math.ceil(coffee)}с`:'' );
+  d.passCount.textContent=`${counts.total} / ${passAt}`;
+  d.selectedStudentName.textContent=character.name;
+  d.selectedStudentPerk.textContent=character.perk;
+  d.overlay.hidden=state==='running';
+  d.startButton.disabled=state==='running';
+  d.pauseButton.disabled=!['running','paused'].includes(state);
+  d.pauseButtonText.textContent=state==='paused'?'Продолжить':'Пауза';
+  d.recordButton.hidden=record.bestLevel<=1;
+  let kicker=`СЕМЕСТР ${pad(stage)} / ${difficulty.name}`;
+  let visual=String(stage),title='Выходи на пару!';
+  let message=`${character.name} — ${character.title.toLowerCase()}. ${difficulty.note}. На уровне ${counts.required} обязательных работ: для зачёта собери минимум ${passAt}, для пятёрки — все.`;
+  let fact1=`${counts.required} РАБОТ`,fact2=`≥${passAt} ДЛЯ ЗАЧЁТА`;
+  let action='Начать уровень ↗',startText='Старт';
+  let status=`Уровень ${stage} · ${counts.total}/${counts.required} работ · ${character.name}`;
+  if(state==='ready')status=`Готов к старту · ${character.name}`;
+  if(state==='paused'){
+    kicker='БОЛЬШАЯ ПЕРЕМЕНА / ПАУЗА';visual='Ⅱ';title='Продолжим после пары?';
+    message=`Студент: ${character.name}. Время остановилось; все предметы и положение сохранены. Вернуться можно в любой момент.`;
+    fact1=`РАБОТЫ ${counts.total}/${counts.required}`;fact2=`ВРЕМЯ ${Math.floor(time)} СЕК.`;
+    action='Продолжить ↗';startText='Продолжить';status='Пауза';
+  }
+  if(state==='won'){
+    kicker=`АТТЕСТАЦИЯ / УРОВЕНЬ ${pad(stage)} СДАН`;visual=String(result.grade);
+    title=result.grade===5?'Пятёрка в зачётке!':`Семестр закрыт на ${result.grade}`;
+    message=`Кокорин Евгений Сергеевич поставил ${result.grade}. Собрано ${result.score} из ${result.total} работ, найдено бонусов: ${result.bonuses}. +${result.points} очков. Впереди новый маршрут и новые угрозы.`;
+    fact1=`+${result.points} ОЧКОВ`;fact2=`СЕРИЯ ПЯТЁРОК ${streak}`;
+    action=`Следующий уровень ${pad(stage+1)} ↗`;startText='Следующий';status=`Оценка ${result.grade} · Уровень ${stage+1} открыт`;
+  }
+  if(state==='failed'){
+    kicker=`ПЕРЕСДАЧА / УРОВЕНЬ ${pad(stage)}`;
+    visual=result?.reason==='teacher'?String(result.grade):'!';
+    title=result?.reason==='teacher'?`Незачёт: оценка ${result.grade}`:'Сессия не пощадила';
+    const causes={enemy:'Ходячий дедлайн',spikes:'Движущиеся колючки',session:'Летающая сессия',fall:'Пропасть'};
+    message=result?.reason==='teacher'?`Преподаватель увидел ${result.score}/${result.total} работ. Нужно минимум ${passAt}. Переиграй уровень и собери больше.`:`${causes[result?.reason]||'Опасность'} прервала попытку. Собрано ${result.score}/${result.total}. Можно сразу пересдать уровень, не теряя уже пройденных.`;
+    fact1=`ПРОЙДЕНО ${stage-1} УРОВНЕЙ`;fact2='ПЕРЕСДАЧА БЕЗ ШТРАФА';
+    action='Пересдать уровень ↻';startText='Пересдать';status='Не зачтено · Пересдача';
+  }
+  d.overlayKicker.textContent=kicker;d.overlayVisual.textContent=visual;
+  d.overlayTitle.textContent=title;d.overlayMessage.textContent=message;
+  d.overlayFact1.textContent=fact1;d.overlayFact2.textContent=fact2;
+  d.overlayButton.textContent=action;d.startButtonText.textContent=startText;d.statusLine.textContent=status;
+  if(previousState==='running'&&state!=='running')restoreScroll();
+  previousState=state;
+  document.querySelectorAll('[data-student-id]').forEach(node=>{
+    const selected=node.dataset.studentId===character.id;
+    node.classList.toggle('is-selected',selected);
+    node.setAttribute('aria-pressed',String(selected));
+  });
+}
+const game=new Game(d.gameCanvas,refresh);
+const input=new Input(()=>game.state==='running');game.setInput(input);
+function renderCards(){
+  d.characterGrid.innerHTML=CHARACTERS.map((student,index)=>`
+    <button type="button" class="student-card ${game.character.id===student.id?'is-selected':''}" data-student-id="${student.id}" aria-pressed="${game.character.id===student.id}">
+      <span class="student-top"><span>${pad(index+1)} / СТУДЕНТ</span><span class="student-pick">ВЫБРАН ✓</span></span>
+      <span class="student-main"><span class="student-portrait" style="--student-accent:${student.coat}"><canvas width="96" height="115" aria-hidden="true"></canvas></span>
+      <span class="student-info"><strong>${student.name}</strong><em>${student.title}</em><span class="student-story">${student.story}</span></span></span>
+      <span class="student-perk"><span>СПОСОБНОСТЬ</span><b>${student.perk}</b></span>
+    </button>`).join('');
+  document.querySelectorAll('[data-student-id]').forEach((btn,index)=>{
+    const canvas=btn.querySelector('canvas'),ctx=canvas.getContext('2d');
+    drawStudent(ctx,CHARACTERS[index],49,107,{scale:1.6});
+    btn.addEventListener('click',()=>{
+      if(game.character.id===btn.dataset.studentId)return;
+      pinScroll();
+      game.chooseCharacter(btn.dataset.studentId);
+      d.characterHelp.textContent=`Выбран: ${game.character.name}. При смене студента текущая попытка начинается заново.`;
+      d.gameCanvas.focus({preventScroll:true});
+    });
+  });
+}
+renderCards();game.emit();
+const focus=()=>d.gameCanvas.focus({preventScroll:true});
+const start=()=>{pinScroll();game.run();focus();};
+d.startButton.addEventListener('click',start);d.overlayButton.addEventListener('click',start);
+d.pauseButton.addEventListener('click',()=>{pinScroll();if(game.state==='paused')start();else game.pause();});
+d.restartButton.addEventListener('click',()=>{pinScroll();game.restart();focus();});
+d.resetButton.addEventListener('click',()=>{pinScroll();game.startOver();focus();});
+d.recordButton.addEventListener('click',()=>{pinScroll();game.startFromRecord();focus();});
+window.addEventListener('keydown',e=>{if(e.code==='Escape'&&game.state==='running'){e.preventDefault();game.pause();}});
+if(new URLSearchParams(location.search).has('test'))window.__webQuest=game;
+
+['pointerdown','touchstart','mousedown'].forEach(evt=>{d.gameCanvas.addEventListener(evt,pinScroll,{passive:true});document.querySelector('.toolbar')?.addEventListener(evt,pinScroll,{passive:true});document.querySelector('.touch-controls')?.addEventListener(evt,pinScroll,{passive:true});});
+
+</script>
+</body>
+</html>

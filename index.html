@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#181818">
+  <meta name="description" content="WEB QUEST — бесконечный платформер о сдаче веб-дизайна: практические работы, контрольные точки, дедлайны и оценки.">
+  <title>WEB QUEST — Бесконечная сессия</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell header-inner">
+      <a class="identity" href="#top" aria-label="WEB QUEST — к началу">
+        <span class="identity-icon">W<span>✳</span></span>
+        <span><strong>WEB QUEST</strong><small>ПЛАТФОРМЕР ПО WEB-ДИЗАЙНУ</small></span>
+      </a>
+      <nav class="nav" aria-label="Навигация">
+        <a href="#students">Студенты</a><a href="#game">Играть</a>
+        <a href="#how">Правила</a>
+        <a href="https://needle.voklaf.ru/teacher-portal/#courses" target="_blank" rel="noopener noreferrer">Портал ↗</a>
+      </nav>
+      <span class="status-pill"><i></i> INFINITE MODE</span>
+    </div>
+  </header>
+  <main id="top" class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> СПБГУПТД / ИГРОВАЯ ДИСЦИПЛИНА / 2026</div>
+        <h1 id="hero-title">Бесконечная<br><em>сессия.</em></h1>
+        <p class="hero-subtitle">Шесть студентов. Один преподаватель. Бесконечно много семестров.<br>Прыгай по движущимся платформам, собирай работы и переживи даже летающую Сессию.</p>
+        <div class="hero-tags"><span>01 / ВЫБИРАЙ</span><span>02 / ПРОХОДИ</span><span>03 / ВЫЖИВАЙ</span></div>
+      </div>
+      <div class="hero-card" aria-label="Карточка игры">
+        <div class="hero-card-top"><strong>СЕЙЧАС В ПРОГРАММЕ</strong><span>↗</span></div>
+        <div class="hero-big">∞<span>уровней</span></div>
+        <div class="hero-card-footer"><div>СЛОЖНОСТЬ РАСТЁТ<br>ПОСЛЕ КАЖДОЙ СДАЧИ</div><span>6<br>HEROES</span></div>
+      </div>
+    </section>
+
+    <section class="roster" id="students" aria-labelledby="roster-title">
+      <div class="section-head"><div><span class="small-label">01 / СТУДЕНЧЕСКИЙ СОСТАВ</span><h2 id="roster-title">Кто пойдёт на зачёт<span class="accent-dot">?</span></h2></div><span class="rules-side">6 СТУДЕНТОВ · 6 РАЗНЫХ УМЕНИЙ</span></div>
+      <p class="roster-intro">У каждого своя университетская история и полезная способность. Выбирай персонажа до старта. Можно сменить студента в любой момент, но текущая попытка начнётся сначала.</p>
+      <div id="characterGrid" class="character-grid" aria-label="Выбор персонажа"></div>
+      <p id="characterHelp" class="character-help" role="status">Нажми на карточку студента, чтобы выбрать персонажа.</p>
+    </section>
+
+    <section class="game-section" id="game" aria-label="Игра WEB QUEST">
+      <div class="section-head"><div><span class="small-label">02 / ВРЕМЯ НА ПЕРЕМЕНУ</span><h2>Игровое поле<span class="accent-dot">.</span></h2></div><div class="difficulty-pill"><i id="difficultyDot"></i><span id="difficultyText">РАЗМИНКА</span><strong id="levelDisplay">УРОВЕНЬ 01</strong></div></div>
+      <div class="scoreboard">
+        <div class="score-cell"><span class="metric-icon coral">▤</span><div><span class="metric-label">ПРАКТИЧЕСКИЕ</span><strong id="bookCount">0 <small>/ 3</small></strong></div></div>
+        <div class="score-cell"><span class="metric-icon lime">★</span><div><span class="metric-label">КОНТРОЛЬНЫЕ</span><strong id="starCount">0 <small>/ 2</small></strong></div></div>
+        <div class="score-cell"><span class="metric-icon blue">↗</span><div><span class="metric-label">ОЧКИ ЗАБЕГА</span><strong id="bankCount">0</strong></div></div>
+        <div class="score-cell"><span class="metric-icon purple">✦</span><div><span class="metric-label">РЕКОРДНЫЙ УРОВЕНЬ</span><strong id="bestLevel">01</strong></div></div>
+      </div>
+      <div class="board" id="board">
+        <canvas id="gameCanvas" width="1120" height="600" tabindex="0" aria-label="Бесконечный платформер. Стрелки или A/D для движения, пробел, W или стрелка вверх для прыжка. Собирайте работы и добирайтесь до преподавателя."></canvas>
+        <div class="overlay" id="overlay" aria-live="polite">
+          <div class="overlay-card">
+            <div class="overlay-head"><span id="overlayKicker">СТАРТ / УРОВЕНЬ 01</span><span class="tiny-dot"></span></div>
+            <div class="overlay-number" id="overlayVisual">∞</div>
+            <h3 id="overlayTitle">Выходи на пару!</h3>
+            <p id="overlayMessage">Собирай практические и контрольные. Для зачёта нужно минимум 60%, а для пятёрки — все работы. Не попадись летающей Сессии!</p>
+            <div class="overlay-facts"><span id="overlayFact1">5 РАБОТ</span><span id="overlayFact2">1 ФИНИШ</span></div>
+            <button class="button button-lime overlay-cta" type="button" id="overlayButton">Начать игру <span>↗</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="toolbar">
+        <div class="toolbar-buttons">
+          <button id="startButton" class="button button-lime" type="button"><span>▶</span><span id="startButtonText">Старт</span></button>
+          <button id="pauseButton" class="button button-outline" type="button" disabled><span>Ⅱ</span><span id="pauseButtonText">Пауза</span></button>
+          <button id="restartButton" class="button button-outline" type="button"><span>↻</span> Переиграть уровень</button>
+          <button id="resetButton" class="button button-quiet" type="button">С 1-го уровня</button>
+          <button id="recordButton" class="button button-quiet" type="button" hidden>С рекордного ↗</button>
+        </div>
+        <div class="toolbar-status"><span class="pulse-dot"></span><span id="statusLine" role="status">Ожидание старта</span></div>
+      </div>
+      <div class="run-boosts" aria-label="Бонусы текущего уровня">
+        <span>НА ЭТАПЕ <b id="stagePoints">0</b> ОЧКОВ</span>
+        <span>БОНУСОВ <b id="bonusCounter">0</b></span>
+        <span>ЩИТЫ / ЭФФЕКТЫ <b id="shieldCount">0</b></span>
+        <span>СОБРАНО / ДЛЯ ЗАЧЁТА <b id="passCount">0 / 3</b></span>
+        <span>ИГРАЕТ <b id="selectedStudentName">Кирилл Королёв</b> <small id="selectedStudentPerk">Практики дают +30% очков</small></span>
+      </div>
+      <div class="touch-controls" aria-label="Экранное управление">
+        <div class="touch-dpad"><button type="button" data-control="left" aria-label="Влево">←</button><button type="button" data-control="right" aria-label="Вправо">→</button></div>
+        <button class="touch-jump" type="button" data-control="jump" aria-label="Прыжок">↑ <span>ПРЫЖОК</span></button>
+      </div>
+      <div class="below-board"><span><b>← → / A D</b> ДВИЖЕНИЕ</span><span><b>SPACE / W / ↑</b> ПРЫЖОК</span><span><b>ESC</b> ПАУЗА</span><span><b id="runTimer">00:00</b> ВРЕМЯ</span><span><b id="streakCount">0</b> ИДЕАЛЬНЫХ ПОДРЯД</span></div>
+    </section>
+
+    <section class="rules" id="how" aria-labelledby="rules-title">
+      <div class="section-head"><div><span class="small-label">03 / ИНСТРУКЦИЯ ПО ВЫЖИВАНИЮ</span><h2 id="rules-title">Что ждёт на паре<span class="accent-dot">.</span></h2></div><span class="rules-side">НОВЫЕ МЕХАНИКИ КАЖДЫЕ НЕСКОЛЬКО УРОВНЕЙ</span></div>
+      <div class="rule-grid">
+        <article class="rule-card"><div class="rule-top"><span>01 / МАРШРУТ</span><span class="rule-icon lime">★</span></div><h3>Работ всё больше</h3><p>С каждой новой ступенью растёт число обязательных книг и звёзд. Для тройки нужно 60% работ, на пятёрку — абсолютно всё.</p><div class="rule-key">3 / 4 / 5 = ЗАЧЁТ</div></article>
+        <article class="rule-card"><div class="rule-top"><span>02 / ФИЗИКА</span><span class="rule-icon blue">↕</span></div><h3>Платформы живут</h3><p>Со второго уровня платформы ездят в стороны, с третьего поднимаются и опускаются. С шестого некоторые разваливаются под ногами.</p><div class="rule-key">СЛЕДИ ЗА ДВИЖЕНИЕМ ПЛАТФОРМ</div></article>
+        <article class="rule-card"><div class="rule-top"><span>03 / ОПАСНОСТИ</span><span class="rule-icon coral">!</span></div><h3>Летающая сессия</h3><p>С третьего уровня пролетает «Сессия», с четвёртого появляются движущиеся колючки и патрули. Прыжок на дедлайн сверху его побеждает.</p><div class="rule-key">ЛОВУШКИ МОЖНО ПЕРЕЖИТЬ СО ЩИТОМ</div></article>
+        <article class="rule-card"><div class="rule-top"><span>04 / БОНУСЫ</span><span class="rule-icon purple">✦</span></div><h3>Зачётные усиления</h3><p>Собирай кофе для замедления опасностей, автосохранение для щита и стипендию для очков. Каждому студенту доступен свой навык.</p><div class="rule-key">ПОПРОБУЙ ВСЕХ ШЕСТЕРЫХ</div></article>
+      </div>
+      <div class="grading"><strong>КАК СТАВЯТ ОЦЕНКУ</strong><div><span>100% работ <b>→ 5</b></span><span>80–99% <b>→ 4</b></span><span>60–79% <b>→ 3</b></span><span class="bad">40–59% <b>→ 2</b></span><span class="bad">0–39% <b>→ 1</b></span></div></div>
+    </section>
+  </main>
+  <footer class="footer"><div class="shell"><span>WEB QUEST / STUDENT PROJECT © 2026</span><span>Учебный проект, вдохновлённый интерфейсом <a href="https://needle.voklaf.ru/teacher-portal/" target="_blank" rel="noopener noreferrer">портала Е. С. Кокорина ↗</a></span></div></footer>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
